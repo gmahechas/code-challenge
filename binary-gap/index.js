@@ -39,8 +39,6 @@ if(gaps.length > 0) {
   console.log(0);
 }
 
-
-
 /*
 const gaps = [];
 const myArr = [1,0,1,0,0];
