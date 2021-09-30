@@ -1,0 +1,13 @@
+{
+    "name": "coding-interview-stephen",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "gmahechas",
+    "license": "MIT",
+    "scripts": {
+        "jest": "jest"
+    },
+    "dependencies": {
+        "jest": "^27.2.3"
+    }
+}
