@@ -70,16 +70,56 @@ function swapItem(array, index, goto) {
 	array[goto] = indexValue;
 }
 
+function loopArray(array, pivot, sign='>', start='left') {
+
+	let newArray = [...array];
+	newArray.splice(newArray.length-1, 1)
+	if (start == 'rigth') {
+		newArray = newArray.reverse();
+	}
+	const evalSign = (sign == '>') ? 'number > pivot' : 'number < pivot';
+
+	let numberFound = 0;
+	for (const number of newArray) {
+		if (eval(evalSign)) {
+			numberFound = number
+			break;
+		}
+	}
+	return numberFound;
+}
+
+function findIndexs(array, numbers) {
+	const indexs = [];
+
+	for (const number of numbers) {
+		indexs.push(array.indexOf(number));
+	}
+
+	return indexs;
+}
+
 function quickShort(array) {
-	console.log(array)
+	console.log('Original:::', array);
 
 	// 1. select pivot
-	let { pivot, pivotIndex } = selectPivot(array);
+	let { pivot, pivotIndex } = selectPivot(array); // O(1)
 
 	// 2. move pivot at end
-	swapItem(array, pivotIndex, array.length-1)
+	swapItem(array, pivotIndex, array.length-1) // O(1)
+	console.log('Move pivot at the end:::',array);
 
-	console.log(array);
+	// 3. from left to rigth find a number large than pivot
+	let numberOne = loopArray(array, pivot); // O(n)
+
+	// 4. from rigth to left find a smaller than pivot
+	let numberTwo = loopArray(array, pivot, '<', 'rigth'); // O(n)
+
+	// 5. swap index
+	let [ indexOne, indexTwo ] = findIndexs(array, [numberOne, numberTwo]); // O(n)
+	swapItem(array, indexOne, indexTwo); // O(1)
+	console.log('Current array:::', array);
+
 }
 
 console.log(quickShort([2, 6, 5, 3, 8, 7, 1, 0]))
