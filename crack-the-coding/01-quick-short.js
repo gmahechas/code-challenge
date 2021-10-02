@@ -48,7 +48,7 @@ How to choose a pivot
 [2,6,5,3,8,7,1,0,4]
 
 // swap
-        pivot
+				pivot
  |       |       |
 [2,6,5,3,4,7,1,0,8]
 
@@ -57,3 +57,29 @@ Worst = O(n2)
 Average = nLog(n)
 
 */
+
+function selectPivot(array) {
+	const pivotIndex = 3;
+	return { pivot: array[pivotIndex], pivotIndex }
+}
+
+function swapItem(array, index, goto) {
+	let indexValue = array[index];
+	let gotoValue = array[goto];
+	array[index] = gotoValue;
+	array[goto] = indexValue;
+}
+
+function quickShort(array) {
+	console.log(array)
+
+	// 1. select pivot
+	let { pivot, pivotIndex } = selectPivot(array);
+
+	// 2. move pivot at end
+	swapItem(array, pivotIndex, array.length-1)
+
+	console.log(array);
+}
+
+console.log(quickShort([2, 6, 5, 3, 8, 7, 1, 0]))
