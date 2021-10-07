@@ -70,26 +70,28 @@ function swapItem(array, index, goto) {
 	array[goto] = indexValue;
 }
 
-function loopArray(array, pivot, sign='>', start='left') {
+function loopArray(array, pivot, sign = '>', start = 'left') {
 
 	let newArray = [...array];
-	newArray.splice(newArray.length-1, 1)
+	newArray.splice(newArray.length - 1, 1)
 	if (start == 'rigth') {
 		newArray = newArray.reverse();
 	}
 	const evalSign = (sign == '>') ? 'number > pivot' : 'number < pivot';
 
+	let indexFound = 0;
 	let numberFound = 0;
-	for (const number of newArray) {
+	for (const [index, number] of Object.entries(newArray)) {
 		if (eval(evalSign)) {
-			numberFound = number
+			indexFound = (start == 'rigth') ? ( newArray.length - parseInt(index) - 1) : parseInt(index);
+			numberFound = number;
 			break;
 		}
 	}
-	return numberFound;
+	return [indexFound, numberFound];
 }
 
-function findIndexs(array, numbers) {
+/* function findIndexs(array, numbers) {
 	const indexs = [];
 
 	for (const number of numbers) {
@@ -97,29 +99,30 @@ function findIndexs(array, numbers) {
 	}
 
 	return indexs;
-}
+} */
 
-function quickShort(array) {
-	console.log('Original:::', array);
-
-	// 1. select pivot
-	let { pivot, pivotIndex } = selectPivot(array); // O(1)
-
-	// 2. move pivot at end
-	swapItem(array, pivotIndex, array.length-1) // O(1)
-	console.log('Move pivot at the end:::',array);
-
+function myRecursive(array, pivot) {
 	// 3. from left to rigth find a number large than pivot
-	let numberOne = loopArray(array, pivot); // O(n)
-
+	let [indexOne, numberOne] = loopArray(array, pivot); // O(n)
 	// 4. from rigth to left find a smaller than pivot
-	let numberTwo = loopArray(array, pivot, '<', 'rigth'); // O(n)
+	let [indexTwo, numberTwo] = loopArray(array, pivot, '<', 'rigth'); // O(n)
 
-	// 5. swap index
-	let [ indexOne, indexTwo ] = findIndexs(array, [numberOne, numberTwo]); // O(n)
-	swapItem(array, indexOne, indexTwo); // O(1)
-	console.log('Current array:::', array);
-
+	if(indexOne > indexTwo) {
+		swapItem(array, indexOne, array.length - 1);
+		return array;
+	} else {
+		debugger;
+		swapItem(array, indexOne, indexTwo); // O(1)
+		myRecursive(array, pivot);
+	}
 }
 
-console.log(quickShort([2, 6, 5, 3, 8, 7, 1, 0]))
+function quickShort2(array) {
+	let { pivot, pivotIndex } = selectPivot(array); // O(1)
+	swapItem(array, pivotIndex, array.length - 1) // O(1)
+	myRecursive(array, pivot)
+	return array
+}
+
+const result = quickShort2([2, 6, 5, 3, 8, 7, 1, 0]);
+console.log(result);
