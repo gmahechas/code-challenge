@@ -15,6 +15,26 @@
 //     [11, 16, 15, 6],
 //     [10,  9,  8, 7]]
 
-function matrix(n) {}
+//  matrix(5)
+//    [[1,  2,  3,  4, 5],
+//     [16, 17, 18, 19, 6],
+//     [15, 24, 25, 20, 7],
+//     [14, 23, 22, 21, 8]
+//     [13, 12, 11, 10, 9]]
 
+function matrix(n) {
+	const results = [];
+	for (let i = 0; i < n; i++) {
+	}
+
+	let counter = 1;
+	let startColumn = 0;
+	let endColumn = n-1
+	let startRow = 0;
+	let endRow = n-1; 
+
+	return results;
+}
+
+console.log(matrix(5))
 module.exports = matrix;
