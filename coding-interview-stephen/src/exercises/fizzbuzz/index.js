@@ -12,27 +12,6 @@
 //   4
 //   buzz
 
-function fizzBuzz(n) {
-	for (let index = 1; index <= n; index++) {
+function fizzBuzz(n) {}
 
-		let message = '';
-
-		let mod3 = index % 3;
-		let mod5 = index % 5;
-		let mod15 = index % 15;
-
-		if(mod15 == 0) {
-			message += 'fizzbuzz';
-		} else if(mod3 == 0) {
-			message += 'fizz';
-		} else if(mod5 == 0) {
-			message += 'buzz'
-		} else {
-			message = index
-		}
-		console.log(message)
-	}
-}
-
-console.log(fizzBuzz(5))
 module.exports = fizzBuzz;
