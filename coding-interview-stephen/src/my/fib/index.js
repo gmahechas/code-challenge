@@ -35,8 +35,9 @@
 function memoize(fn) {
 
 	const cache = {};
-
+	debugger;
 	return function (...args) {
+		debugger;
 		if (cache[args]) {
 			return cache[args];
 		}
@@ -49,13 +50,13 @@ function memoize(fn) {
 }
 
 function slowFib(n) {
-
+	
 	if(n<2) {
 		return n;
 	}
-
+	
 	return fib(n-1) + fib(n-2);
-
+	
 }
 
 const fib = memoize(slowFib);
