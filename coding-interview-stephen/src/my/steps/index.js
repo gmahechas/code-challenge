@@ -31,7 +31,21 @@
 	}
 } */
 
-function steps(n, row=0, stair='') {
+function steps(n) {
+	for (let i = 0; i < n; i++) {
+		let steps = '';
+		for (let j = 0; j < n; j++) {
+			if (j < n - 1 - i) {
+				steps += ' ';
+			} else {
+				steps += '#';
+			}
+		}
+		console.log(steps);
+	}
+}
+
+/* function steps(n, row=0, stair='') {
 	if (n == row) {
 		return;
 	}
@@ -49,8 +63,8 @@ function steps(n, row=0, stair='') {
 	}
 	debugger;
 	steps(n, row, stair)
-}
+} */
 
-steps(3)
+steps(6)
 
 module.exports = steps;
