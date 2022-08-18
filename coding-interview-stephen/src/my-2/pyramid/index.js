@@ -13,7 +13,29 @@
 //       '  #  '
 //       ' ### '
 //       '#####'
+//   pyramid(4)
+//       '   #   '
+//       '  ###  '
+//       ' ##### '
+//       '#######'
 
-function pyramid(n) {}
+function pyramid(n) {
+	let cN = (n * 2) -1;
+	let midPoint = Math.floor(cN/2);
+
+	for (let row = 0; row < n; row++) {
+		let stair = '';
+		for (let column = 0; column < cN; column++) {
+			if (midPoint - row <= column && midPoint + row >= column) {
+				stair += '#';
+			} else {
+				stair += ' ';
+			}
+		}
+		console.log(stair);
+	}
+}
+
+pyramid(3)
 
 module.exports = pyramid;

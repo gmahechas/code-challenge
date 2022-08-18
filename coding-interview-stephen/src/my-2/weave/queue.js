@@ -16,6 +16,22 @@ class Queue {
   remove() {
     return this.data.pop();
   }
+
+  peek() {
+    return this.data[this.data.length-1];
+  }
+
+  *[Symbol.iterator]() {
+/*     let first = this.remove()
+    while (first){
+      yield first;
+      first = this.remove();
+    } */
+  };
+
+  printData() {
+    console.log(this.data);
+  }
 }
 
 module.exports = Queue;

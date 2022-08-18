@@ -4,6 +4,10 @@ module.exports = class Node {
     this.children = [];
   }
 
+  addMany(data) {
+    this.children.push(...data);
+  }
+  
   add(data) {
     this.children.push(new Node(data));
   }
