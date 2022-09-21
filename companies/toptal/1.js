@@ -25,14 +25,15 @@ const https = require('https');
 
 }  */
 
-const request = https.get('https://coderbyte.com/api/challenges/json/age-counting', (res) => {
+/* const request = https.get('https://coderbyte.com/api/challenges/json/age-counting', (res) => {
 
 	let data = '';
 	res.on('data', (chunk) => {
 		data = data + chunk.toString();
 	});
-
+	
 	res.on('end', () => {
+		const writeStream = fs.createWriteStream('./output.txt');
 		const body = JSON.parse(data);
 		let split = body.data.split(',');
 
@@ -46,7 +47,60 @@ const request = https.get('https://coderbyte.com/api/challenges/json/age-countin
 			}
 		}
 		console.log(count);
+	
 	});
 })
 
-request.end();
+request.end(); */
+
+const fs = require('fs');
+const crypto = require('crypto');
+const generateFile = async () => {
+
+	return new Promise((resolve, reject) => {
+		const req = https.get('https://coderbyte.com/api/challenges/json/age-counting', (res) => {
+			let data = '';
+			res.on('data', (chunk) => {
+				data = data + chunk.toString();
+			});
+
+			res.on('end', async () => {
+				const writeStream = fs.createWriteStream('./output.txt');
+				const body = JSON.parse(data);
+				let split = body.data.split(',');
+
+				let keyValue = '';
+				for (const item of split) {
+					let arr = item.trim().split('=');
+					if (arr[0] == 'key') keyValue = arr[1];
+					if (arr[0] == 'age') {
+						if (parseInt(arr[1]) == 32) {
+							writeStream.write(keyValue + '\r\n');
+						}
+					}
+				}
+				writeStream.end();
+				writeStream.on('finish', () => resolve(true));
+			});
+
+			res.on('error', (error) => reject(error))
+		})
+
+		req.end();
+	});
+
+}
+
+const generateSHA1 = () => {
+	const fileBuffer = fs.readFileSync('./output.txt');
+	const sha1sum = crypto.createHash('sha1').update(fileBuffer).digest("hex");
+	return sha1sum;
+}
+
+const start = async () => {
+	await generateFile();
+	const sha1 = generateSHA1();
+	console.log(sha1);
+}
+
+start()
