@@ -1,0 +1,30 @@
+function getIndex(letra) {
+  abecedario = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  return abecedario.indexOf(letra) + 1; 
+}
+
+function isLetter(letter) {
+  return (letter.length === 1 && letter.match(/[a-z]/i)) ? true : false;
+}
+
+function getWords(str) {
+  var newStr = str.toLowerCase();
+  var returnStr = '';
+
+  wordsArray = newStr.split(' ');
+  wordsArray.forEach(word => {
+
+    wordArray = word.split('');
+    wordArray.forEach(letter => {
+      if(isLetter(letter)) {
+        returnStr = returnStr.concat(getIndex(letter));
+      } else {
+        returnStr = returnStr.concat(letter);
+      }
+    });
+    returnStr = returnStr.concat(' ');
+  });
+  return returnStr;
+}
+
+console.log(getWords("Argument goes here"));

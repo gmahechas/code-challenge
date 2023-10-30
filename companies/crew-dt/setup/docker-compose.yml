@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  crew-be:
+    container_name: crew-be
+    image: crew-be:0.0.1
+    ports:
+      - "5000:5000"
+    build:
+      context: ../
+      dockerfile: setup/Dockerfile
+      args:
+        port: 5000
+        ppath: .
+    networks:
+      - crew-be
+networks:
+  crew-be:
+    name: crew-be
+    driver: bridge

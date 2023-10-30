@@ -1,0 +1,23 @@
+const axios = require('axios');
+async function getCountryName(code) {
+    // write your code here
+    // API endpoint: https://jsonmock.hackerrank.com/api/countries?page=<PAGE_NUMBER>
+    
+    var country = null;
+    for(let i = 1; i <= 25; i++) {
+        let { page, per_page, total, total_pages, data } = await consumeAPI(i);
+        let newCountry = data.find(country => country.alpha2Code === code);
+        if(newCountry != undefined) {
+            country = newCountry;
+            break;
+        }
+    }
+
+    // console.log('Country:::', country);
+
+    return country.name;
+}
+
+async function consumeAPI(page){  
+    return await axios.get(`https://jsonmock.hackerrank.com/api/countries?page=${page}`).then(response => response.data);
+}

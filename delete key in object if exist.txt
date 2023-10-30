@@ -1,0 +1,11 @@
+Obj: Object
+Prop: key
+
+
+function stripProperty(obj, prop) {
+
+  if(!(obj[prop] === undefined)) {
+      delete obj[prop];
+  }
+  return obj;
+}

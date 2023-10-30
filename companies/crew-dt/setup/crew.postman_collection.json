@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "b6b2e80a-85d6-4206-bf9c-4ec5a60a39ec",
+		"name": "crew",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1175216"
+	},
+	"item": [
+		{
+			"name": "import league",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation importLeague($data: ImportLeague) {\n\timportLeague(data: $data)\n}",
+						"variables": "{\n    \"data\": {\n        \"leagueCode\": \"PL\"\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find one league",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchOneCompetition($data: SearchOneCompetition) {\n  searchOneCompetition(data: $data) {\n    _id\n    name\n    code\n    areaName\n    teams {\n        _id\n        name\n        tla\n        shortName\n        areaName\n        address\n    }\n  }\n}",
+						"variables": "{\n    \"data\": {\n        \"code\": \"CL\"\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find many leagues",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchManyCompetition($data: [SearchOneCompetition]) {\n  searchManyCompetition(data: $data) {\n    _id\n    name\n    code\n    areaName\n  }\n}",
+						"variables": "{\n   \"data\" : [\n       { \"code\": \"CL\" },\n       { \"code\": \"WC\" }\n   ]\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find one team",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchOneTeam($data: SearchOneTeam) {\n  searchOneTeam(data: $data) {\n    _id\n    name\n    tla\n    shortName\n    areaName\n    address\n    competition {\n        name\n    }\n    players {\n        _id\n        name\n        position\n        dateOfBirth\n        nationality\n    }\n  }\n}",
+						"variables": "{\n    \"data\": {\n        \"tla\": \"B04\"\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find many teams",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchManyTeam($data: [SearchOneTeam]) {\n  searchManyTeam(data: $data) {\n    _id\n    name\n    tla\n    shortName\n    areaName\n    address\n    competition {\n        name\n    }\n  }\n}",
+						"variables": "{\n   \"data\" : [\n       { \"shortName\": \"Leverkusen\" },\n       { \"shortName\": \"Dortmund\" }\n   ]\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find one player",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchOnePlayer($data: SearchOnePlayer) {\n  searchOnePlayer(data: $data) {\n    _id\n    name\n    position\n    dateOfBirth\n    nationality,\n    competition {\n        name\n    }\n    team {\n        name\n    }\n  }\n}",
+						"variables": "{\n    \"data\": {\n        \"_id\": \"641fca6ea5a6f83fc345d6f4\",\n        \"name\": \"Niklas Lomb\"\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find many players",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchManyPlayer($data: [SearchOnePlayer]) {\n  searchManyPlayer(data: $data) {\n    _id\n    name\n    position\n    dateOfBirth\n    nationality\n  }\n}",
+						"variables": "{\n   \"data\" : [\n       { \"name\": \"Niklas Lomb\", \"dateOfBirth\": \"1993-07-28\" },\n       { \"name\": \"Andrei Lunev\", \"dateOfBirth\": \"1991-11-13\" }\n   ]\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find one coach",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchOneCoach($data: SearchOneCoach) {\n  searchOneCoach(data: $data) {\n    _id\n    name\n    dateOfBirth\n    nationality\n    competition {\n        name\n    }\n    team {\n        name\n    }\n  }\n}",
+						"variables": "{\n    \"data\": {\n        \"name\": \"Michal Bílek\"\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find many coaches",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchManyCoach($data: [SearchOneCoach]) {\n  searchManyCoach(data: $data) {\n    _id\n    name\n    dateOfBirth\n    nationality\n  }\n}",
+						"variables": "{\n   \"data\" : [\n       { \"name\": \"Michal Bílek\" },\n       { \"name\": \"Andrea Pisanu\" }\n   ]\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find many players by league code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchManyPlayersByLeague($data: SearchPlayersByLeagueCode) {\n  searchManyPlayersByLeague(data: $data) {\n    _id\n    name\n    position\n    dateOfBirth\n    nationality\n  }\n}",
+						"variables": "{\n    \"data\": {\n        \"leagueCode\": \"PL\"\n    }\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/graphql/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"graphql",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
