@@ -1,0 +1,11 @@
+{
+    "name": "encora",
+    "private": true,
+    "scripts": {
+        "lerna": "lerna",
+        "start": "lerna run start"
+    },
+    "devDependencies": {
+        "lerna": "^7.4.2"
+    }
+}

@@ -1,0 +1,1 @@
+export declare type PublicOnly<T> = Pick<T, keyof T>;
